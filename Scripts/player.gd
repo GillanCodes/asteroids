@@ -5,14 +5,22 @@ signal laser_shot(laser);
 @export var acceleration : float = 10.0;
 @export var max_speed : float = 350.0;
 @export var rotation_speed : float = 250.0;
+@export var shoot_cd_time: float = 0.1;
+
 
 @onready var muzzle := $Muzzle
 
 var laser_scene = preload("res://Scenes/laser.tscn");
+var shoot_cd : bool = false
 
 func _process(delta: float) -> void:
-	if(Input.is_action_just_pressed("shoot")):
+	if(Input.is_action_pressed("shoot")):
+		if shoot_cd:
+			return;
+		shoot_cd = true;
 		_shoot_laser();
+		await get_tree().create_timer(shoot_cd_time).timeout
+		shoot_cd = false;
 
 func _physics_process(delta: float) -> void:
 	var input_vector:Vector2 = Vector2(0, Input.get_axis("move_forward", "move_backward"));
