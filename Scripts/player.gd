@@ -13,7 +13,7 @@ signal laser_shot(laser);
 var laser_scene = preload("res://Scenes/laser.tscn");
 var shoot_cd : bool = false
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if(Input.is_action_pressed("shoot")):
 		if shoot_cd:
 			return;

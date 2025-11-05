@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://daaqlnpsuvpy0" path="res://Scripts/asteroid.gd" id="1_a2bka"]
 
 [node name="Asteroid" type="Area2D"]
+collision_layer = 4
+collision_mask = 11
 script = ExtResource("1_a2bka")
 size = 1
 

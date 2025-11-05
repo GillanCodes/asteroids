@@ -1,4 +1,6 @@
-extends Area2D
+class_name Asteroid extends Area2D
+
+signal exploded(position, size);
 
 var movement_vector: Vector2 = Vector2(0, -1);
 
@@ -40,3 +42,7 @@ func _physics_process(delta: float) -> void:
 		global_position.x = (screen_size.x + radius);
 	elif global_position.x - radius > screen_size.x:
 		global_position.x = -radius;
+
+func explode():
+	emit_signal("exploded", global_position, size);
+	queue_free();
