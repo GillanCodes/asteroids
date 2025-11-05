@@ -1,7 +1,7 @@
 extends Area2D
 
 var _movevement_vector: Vector2 = Vector2(0, -1);
-@export var speed:float = 100;
+@export var speed:float = 250;
 
 func _physics_process(delta):
 	global_position += _movevement_vector.rotated(rotation) * speed * delta

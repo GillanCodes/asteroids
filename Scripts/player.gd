@@ -5,7 +5,7 @@ signal laser_shot(laser);
 @export var acceleration : float = 10.0;
 @export var max_speed : float = 350.0;
 @export var rotation_speed : float = 250.0;
-@export var shoot_cd_time: float = 0.1;
+@export var shoot_cd_time: float = 0.5;
 
 
 @onready var muzzle := $Muzzle

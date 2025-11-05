@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://btmary1cxaf4s"]
+[gd_scene load_steps=4 format=3 uid="uid://btmary1cxaf4s"]
 
 [ext_resource type="PackedScene" uid="uid://mwksy20cmwyt" path="res://Scenes/player.tscn" id="1_ebmjs"]
 [ext_resource type="Script" uid="uid://v7lmwg5anrow" path="res://Scripts/game.gd" id="1_qxrlw"]
+[ext_resource type="PackedScene" uid="uid://ds80ke4yr5l6t" path="res://Scenes/asteroid.tscn" id="3_wrm1d"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_qxrlw")
@@ -10,3 +11,6 @@ script = ExtResource("1_qxrlw")
 position = Vector2(640, 360)
 
 [node name="Lasers" type="Node" parent="."]
+
+[node name="Asteroid" parent="." instance=ExtResource("3_wrm1d")]
+position = Vector2(449, 341)
