@@ -1,14 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://btmary1cxaf4s"]
+[gd_scene load_steps=7 format=3 uid="uid://btmary1cxaf4s"]
 
 [ext_resource type="PackedScene" uid="uid://mwksy20cmwyt" path="res://Scenes/player.tscn" id="1_ebmjs"]
 [ext_resource type="Script" uid="uid://v7lmwg5anrow" path="res://Scripts/game.gd" id="1_qxrlw"]
+[ext_resource type="PackedScene" uid="uid://dx4f3ykcmc3w5" path="res://Scenes/hud.tscn" id="2_3dryh"]
+[ext_resource type="PackedScene" uid="uid://cd4hlokkvso8j" path="res://Scenes/game_over_screen.tscn" id="3_wowpa"]
 [ext_resource type="PackedScene" uid="uid://ds80ke4yr5l6t" path="res://Scenes/asteroid.tscn" id="3_wrm1d"]
+[ext_resource type="PackedScene" uid="uid://be81moyjd3tau" path="res://Scenes/player_spawn_area.tscn" id="4_i6g32"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_qxrlw")
 
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="UI" instance=ExtResource("2_3dryh")]
+
+[node name="GameOverScreen" parent="UI" instance=ExtResource("3_wowpa")]
+visible = false
+
+[node name="PlayerSpawnPoint" type="Node2D" parent="."]
+position = Vector2(640, 360)
+
+[node name="PlayerSpawnArea" parent="PlayerSpawnPoint" instance=ExtResource("4_i6g32")]
+
 [node name="Player" parent="." instance=ExtResource("1_ebmjs")]
 position = Vector2(640, 360)
+shoot_cd_time = 0.01
 
 [node name="Lasers" type="Node" parent="."]
 
