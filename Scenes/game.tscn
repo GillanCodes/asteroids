@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://btmary1cxaf4s"]
+[gd_scene load_steps=17 format=3 uid="uid://btmary1cxaf4s"]
 
 [ext_resource type="PackedScene" uid="uid://mwksy20cmwyt" path="res://Scenes/player.tscn" id="1_ebmjs"]
 [ext_resource type="Script" uid="uid://v7lmwg5anrow" path="res://Scripts/game.gd" id="1_qxrlw"]
@@ -14,6 +14,37 @@
 [ext_resource type="AudioStream" uid="uid://m34er07wjrhe" path="res://Assets/SFX/START_1.wav" id="12_rku1e"]
 [ext_resource type="AudioStream" uid="uid://c53cbt1i0qo2f" path="res://Assets/SFX/PICKUP_1.wav" id="13_rfjv2"]
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rfjv2"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 360, 1)
+direction = Vector3(0.5, 0, 0)
+initial_velocity_min = -10.0
+initial_velocity_max = -10.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1phco"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 360, 1)
+direction = Vector3(0.5, 0, 0)
+initial_velocity_min = -20.0
+initial_velocity_max = -20.0
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 3.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nb51f"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 360, 1)
+direction = Vector3(0.5, 0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+scale_min = 5.0
+scale_max = 5.0
+
 [node name="Game" type="Node2D"]
 script = ExtResource("1_qxrlw")
 
@@ -24,6 +55,32 @@ script = ExtResource("1_qxrlw")
 [node name="GameOverScreen" parent="UI" instance=ExtResource("3_wowpa")]
 visible = false
 
+[node name="Backgound" type="Node" parent="."]
+
+[node name="StarfieldBack" type="GPUParticles2D" parent="Backgound"]
+z_index = -100
+position = Vector2(1312, 360)
+amount = 1000
+lifetime = 140.0
+preprocess = 280.0
+process_material = SubResource("ParticleProcessMaterial_rfjv2")
+
+[node name="StarFieldMiddle" type="GPUParticles2D" parent="Backgound"]
+z_index = -95
+position = Vector2(1312, 360)
+amount = 250
+lifetime = 140.0
+preprocess = 280.0
+process_material = SubResource("ParticleProcessMaterial_1phco")
+
+[node name="StarFieldFront" type="GPUParticles2D" parent="Backgound"]
+z_index = -90
+position = Vector2(1312, 360)
+amount = 40
+lifetime = 140.0
+preprocess = 280.0
+process_material = SubResource("ParticleProcessMaterial_nb51f")
+
 [node name="PlayerSpawnPoint" type="Node2D" parent="."]
 position = Vector2(640, 360)
 
@@ -31,9 +88,6 @@ position = Vector2(640, 360)
 
 [node name="Player" parent="." instance=ExtResource("1_ebmjs")]
 position = Vector2(640, 360)
-acceleration = null
-max_speed = null
-rotation_speed = null
 shoot_cd_time = 0.01
 
 [node name="Lasers" type="Node" parent="."]
