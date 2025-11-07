@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Asteroids With Steroids"
+config/name="Asteroids"
 run/main_scene="uid://btmary1cxaf4s"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
