@@ -38,6 +38,7 @@ func _on_player_laser_shot(laser) -> void:
 	$AudioStream/LaserSound.play();
 
 func _on_player_died() -> void:
+	player.global_position = player_spawn_point.global_position;
 	lives -= 1;
 	if lives <= 0:
 		$AudioStream/GameOver.play();
@@ -49,7 +50,7 @@ func _on_player_died() -> void:
 		await get_tree().create_timer(1).timeout;
 		while !player_spawn_area.is_empty:
 			await get_tree().create_timer(0.1).timeout;
-		player.respawn(player_spawn_point.global_position);
+		player.respawn();
 
 func _on_asteroid_exploded(pos, size, points) -> void:
 	score += points;

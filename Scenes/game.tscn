@@ -31,6 +31,9 @@ position = Vector2(640, 360)
 
 [node name="Player" parent="." instance=ExtResource("1_ebmjs")]
 position = Vector2(640, 360)
+acceleration = null
+max_speed = null
+rotation_speed = null
 shoot_cd_time = 0.01
 
 [node name="Lasers" type="Node" parent="."]
