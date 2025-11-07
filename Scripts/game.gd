@@ -10,6 +10,8 @@ extends Node2D
 
 var asteroid_scene = preload("res://Scenes/asteroid.tscn");
 
+var last_milestone:int = 0;
+
 var score:int = 0:
 	set(value):
 		score = value;
@@ -21,6 +23,7 @@ var lives: int = 3:
 		hud.init_lives(lives)
 
 func _ready() -> void:
+	$AudioStream/Start.play()
 	score = 0;
 	lives = 3;
 	game_over_screen.visible = false;
@@ -31,20 +34,27 @@ func _ready() -> void:
 		asteroid.connect("exploded", _on_asteroid_exploded)
 
 func _on_player_laser_shot(laser) -> void:
-	lasers.add_child(laser)
+	lasers.add_child(laser);
+	$AudioStream/LaserSound.play();
 
 func _on_player_died() -> void:
 	lives -= 1;
 	if lives <= 0:
+		$AudioStream/GameOver.play();
+		await get_tree().create_timer(1).timeout;
+		$AudioStream/GameOverScreen.play();
 		game_over_screen.visible = true;
 	else:
+		$AudioStream/PlayerDied.play();
+		await get_tree().create_timer(1).timeout;
 		while !player_spawn_area.is_empty:
 			await get_tree().create_timer(0.1).timeout;
 		player.respawn(player_spawn_point.global_position);
-	
 
 func _on_asteroid_exploded(pos, size, points) -> void:
 	score += points;
+	_check_score();
+	$AudioStream/AsteroidDestroyed.play();
 	for i in range(2):
 		match size:
 			Asteroid.AsteroidSize.LARGE:
@@ -60,3 +70,16 @@ func _spawn_asteroid(pos, size):
 	a.size = size;
 	a.connect("exploded", _on_asteroid_exploded);
 	asteroids.call_deferred("add_child", a);
+
+func _check_score() -> void:
+	# (score / 500) round down 
+	# => (650/500) = 1.3 = 1 then * 500 = 500 
+	# so current milestone is 500 so next is 1000
+	@warning_ignore("integer_division")
+	var current_milestone = floor(score / 500) * 500
+	
+	if current_milestone > last_milestone and current_milestone > 0:
+		$AudioStream/Score_hit.play();
+		last_milestone = current_milestone
+	
+	

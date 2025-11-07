@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://btmary1cxaf4s"]
+[gd_scene load_steps=14 format=3 uid="uid://btmary1cxaf4s"]
 
 [ext_resource type="PackedScene" uid="uid://mwksy20cmwyt" path="res://Scenes/player.tscn" id="1_ebmjs"]
 [ext_resource type="Script" uid="uid://v7lmwg5anrow" path="res://Scripts/game.gd" id="1_qxrlw"]
@@ -6,6 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://cd4hlokkvso8j" path="res://Scenes/game_over_screen.tscn" id="3_wowpa"]
 [ext_resource type="PackedScene" uid="uid://ds80ke4yr5l6t" path="res://Scenes/asteroid.tscn" id="3_wrm1d"]
 [ext_resource type="PackedScene" uid="uid://be81moyjd3tau" path="res://Scenes/player_spawn_area.tscn" id="4_i6g32"]
+[ext_resource type="AudioStream" uid="uid://broiyxxurvaa5" path="res://Assets/SFX/BULLET_1.wav" id="7_1l0tm"]
+[ext_resource type="AudioStream" uid="uid://qwmeaw2h8qd1" path="res://Assets/SFX/hit.wav" id="8_o5yvi"]
+[ext_resource type="AudioStream" uid="uid://cuc06pwg4n7ie" path="res://Assets/SFX/DESTROY_2.wav" id="9_h4fw4"]
+[ext_resource type="AudioStream" uid="uid://b6xb8nks71hq2" path="res://Assets/SFX/GAME_OVER_1.wav" id="10_ldgsr"]
+[ext_resource type="AudioStream" uid="uid://xxcrtny23ile" path="res://Assets/SFX/POWER_OFF.wav" id="11_rku1e"]
+[ext_resource type="AudioStream" uid="uid://m34er07wjrhe" path="res://Assets/SFX/START_1.wav" id="12_rku1e"]
+[ext_resource type="AudioStream" uid="uid://c53cbt1i0qo2f" path="res://Assets/SFX/PICKUP_1.wav" id="13_rfjv2"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_qxrlw")
@@ -45,3 +52,26 @@ size = 0
 [node name="Asteroid4" parent="Asteroids" instance=ExtResource("3_wrm1d")]
 position = Vector2(390, 143)
 size = 0
+
+[node name="AudioStream" type="Node" parent="."]
+
+[node name="LaserSound" type="AudioStreamPlayer" parent="AudioStream"]
+stream = ExtResource("7_1l0tm")
+
+[node name="AsteroidDestroyed" type="AudioStreamPlayer" parent="AudioStream"]
+stream = ExtResource("8_o5yvi")
+
+[node name="PlayerDied" type="AudioStreamPlayer" parent="AudioStream"]
+stream = ExtResource("9_h4fw4")
+
+[node name="GameOver" type="AudioStreamPlayer" parent="AudioStream"]
+stream = ExtResource("10_ldgsr")
+
+[node name="GameOverScreen" type="AudioStreamPlayer" parent="AudioStream"]
+stream = ExtResource("11_rku1e")
+
+[node name="Start" type="AudioStreamPlayer" parent="AudioStream"]
+stream = ExtResource("12_rku1e")
+
+[node name="Score_hit" type="AudioStreamPlayer" parent="AudioStream"]
+stream = ExtResource("13_rfjv2")

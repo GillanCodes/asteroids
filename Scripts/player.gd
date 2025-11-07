@@ -68,5 +68,6 @@ func respawn(pos):
 		alive = true;
 		global_position = pos;
 		velocity = Vector2.ZERO;
+		await get_tree().create_timer(.5).timeout;
 		sprite.visible = true;
-		process_mode = Node.PROCESS_MODE_INHERIT
+		process_mode = Node.PROCESS_MODE_INHERIT;
